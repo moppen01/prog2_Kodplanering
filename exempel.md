@@ -1,9 +1,16 @@
 # OOP-projekt – Spelidéer
+
+Här är några olika idéer på små spel och program som du kan utgå från.
+
+Projekten är olika mycket styrda. På de första idéerna får du mer hjälp med hur OOP kan användas. Längre ner får du större frihet att själv bestämma hur programmet ska byggas.
+
+**Tänk litet!** Du behöver inte skapa ett stort eller avancerat spel. Målet är att göra en liten fungerande prototyp där du får möjlighet att träna på OOP.
+
 ---
 
-# Färdiga projektidéer
+# Mer styrda projekt
 
-Dessa projekt innehåller en tydlig plan för hur OOP ska användas, men du behöver fortfarande skriva pseudokoden och implementera spelet själv.
+Dessa projekt innehåller en tydlig idé och exempel på hur OOP-koncepten kan användas. Du behöver fortfarande planera programmet, skriva pseudokod och implementera det själv.
 
 ---
 
@@ -11,33 +18,27 @@ Dessa projekt innehåller en tydlig plan för hur OOP ska användas, men du beh�
 
 ## Spelet
 
-Spelaren har ett monster och möter andra monster i turbaserade strider.
+Spelaren har ett monster och möter ett annat monster i en enkel turbaserad strid.
 
-Varje monster har:
+Ett monster kan exempelvis ha:
 
 * Namn
 * HP
 * Level
 * Attack
 
-Under sin tur kan spelaren exempelvis välja:
+Under sin tur kan spelaren exempelvis välja att:
 
-* Attack
-* Heal
+* Attackera
+* Läka
 
-Striden fortsätter tills ett monster har 0 HP.
+Striden fortsätter tills någon får 0 HP.
 
-Börja med ett väldigt enkelt stridssystem. Lägg sedan till fler funktioner om du hinner.
+**Håll striden enkel!** Du behöver inte skapa ett avancerat stridssystem.
 
-## Arv
+## Exempel på arv
 
-Skapa en superklass:
-
-```text
-Monster
-```
-
-och olika typer av monster:
+Du kan skapa en superklass:
 
 ```text
 Monster
@@ -46,7 +47,7 @@ Monster
 └── Ghost
 ```
 
-Alla monster ska ärva gemensamma egenskaper från `Monster`, exempelvis:
+`Monster` kan innehålla gemensamma egenskaper som:
 
 ```text
 name
@@ -54,97 +55,89 @@ hp
 level
 ```
 
-De olika monstertyperna kan sedan ha egna egenskaper.
+De olika monstertyperna kan sedan ha egna egenskaper eller beteenden.
 
-## Polymorfism
+## Exempel på polymorfism
 
-Alla monster ska ha en metod:
+Alla monster kan ha en metod:
 
 ```text
 attack()
 ```
 
-Men attacken ska fungera olika beroende på vilken typ av monster det är.
-
-Exempel:
+Men attacken kan fungera olika beroende på vilken typ av monster det är.
 
 ```text
 Dragon.attack()
-    → gör fire damage
+    → gör mycket skada
 
 Slime.attack()
-    → gör poison damage
+    → gör mindre skada
 
 Ghost.attack()
-    → gör ghost damage
+    → gör en speciell attack
 ```
 
-Spelet ska kunna göra:
+Programmet ska kunna anropa:
 
 ```text
 monster.attack()
 ```
 
-utan att Battle-klassen behöver veta exakt vilken typ av monster det är.
+utan att behöva veta exakt vilken typ av monster det är.
 
-## Inkapsling
+## Exempel på inkapsling
 
-Monsterets HP ska inte kunna ändras direkt från resten av programmet.
+Monsterets HP kan vara privat.
 
-Undvik exempelvis:
+I stället för att låta andra delar av programmet ändra HP direkt:
 
 ```text
 monster.hp = -500
 ```
 
-Använd istället metoder:
+kan monsterklassen själv kontrollera hur HP förändras:
 
 ```text
 monster.take_damage(20)
 monster.heal(10)
 ```
 
-Monster-klassen bestämmer själv hur HP får förändras.
+## Exempel på relationer
 
-## Relationer
+En `Player` kan ha ett `Monster`.
 
-En `Player` har ett monster.
-
-En `Battle` har två deltagare.
-
-Exempel:
+En `Battle` kan ha två monster.
 
 ```text
 Player
 └── har → Monster
 
 Battle
-├── har → Player
+├── har → Monster
 └── har → Monster
 ```
 
-## Minsta fungerande version
+## Lagom första version
 
-Spelet behöver minst kunna:
+En liten version kan exempelvis:
 
 1. Skapa en spelare
-2. Skapa ett monster
+2. Skapa två monster
 3. Starta en strid
-4. Låta spelaren attackera
-5. Låta monstret attackera
-6. Avsluta striden när någon får 0 HP
+4. Låta monstren attackera varandra
+5. Avsluta när någon får 0 HP
 
-### Fördjupning
+### Om du blir klar
 
-Om du vill bygga vidare:
+Du kan exempelvis lägga till:
 
 * Flera monster
 * Olika attacker
-* Critical hits
-* XP
-* Leveling
 * Specialförmågor
-* Olika typer av damage
+* Level
+* XP
+* Critical hits
 
 ---
 
@@ -152,31 +145,29 @@ Om du vill bygga vidare:
 
 ## Spelet
 
-Du driver ett café.
+Du driver ett litet café.
 
-Spelaren börjar med en viss mängd pengar och ska tjäna pengar genom att köpa ingredienser, tillverka produkter och sälja dem.
+Du har pengar och kan köpa ingredienser, tillverka produkter och sälja dem.
 
-Börja exempelvis med:
-
-```text
-Mjöl + Ägg + Socker
-        ↓
-      Kaka
-        ↓
-      Sälj
-        ↓
-     Pengar
-```
-
-## Arv
-
-Skapa en superklass:
+Exempel:
 
 ```text
-Product
+Ingredienser
+     ↓
+  Tillverka
+     ↓
+   Produkt
+     ↓
+    Sälj
+     ↓
+   Pengar
 ```
 
-och olika produkter:
+Börja med bara några få produkter och ingredienser.
+
+## Exempel på arv
+
+Du kan skapa:
 
 ```text
 Product
@@ -185,93 +176,80 @@ Product
 └── Sandwich
 ```
 
-Alla produkter delar exempelvis:
+Alla produkter kan exempelvis ha:
 
 ```text
 name
 price
 ```
 
-men varje produkt kan ha olika ingredienser och tillagningsprocess.
+men de kan tillverkas på olika sätt.
 
-## Polymorfism
+## Exempel på polymorfism
 
-Alla produkter ska ha en metod:
+Alla produkter kan ha:
 
 ```text
 prepare()
 ```
 
-Men metoden fungerar olika beroende på produkt.
-
-Exempel:
+men metoden fungerar olika för olika produkter.
 
 ```text
 Coffee.prepare()
-    → använd kaffe och mjölk
+    → tillverka kaffe
 
 Cake.prepare()
-    → använd mjöl, ägg och socker
+    → baka kaka
 
 Sandwich.prepare()
-    → använd bröd, ost och skinka
+    → gör smörgås
 ```
 
-Caféet ska kunna göra:
+Caféet kan då arbeta med olika produkter utan att behöva känna till exakt vilken typ av produkt det är.
 
-```text
-product.prepare()
-```
+## Exempel på inkapsling
 
-utan att behöva veta vilken specifik produkt det är.
+Caféets pengar kan vara privat.
 
-## Inkapsling
-
-Caféets pengar och lager ska inte kunna ändras direkt.
-
-Undvik exempelvis:
+I stället för:
 
 ```text
 cafe.money += 10000
 ```
 
-Använd istället metoder som:
+kan caféet själv ansvara för hur pengarna förändras:
 
 ```text
 cafe.buy_ingredient(...)
 cafe.sell_product(...)
 ```
 
-Café-klassen ansvarar själv för att pengarna och lagret förändras korrekt.
-
-## Relationer
-
-Caféet har ingredienser och produkter och tar emot kunder.
-
-Exempel:
+## Exempel på relationer
 
 ```text
 Cafe
 ├── har → Ingredients
-├── har → Products
-└── tar emot → Customers
+└── har → Products
 
 Player
 └── driver → Cafe
 ```
 
-## Minsta fungerande version
+## Lagom första version
 
-Spelet behöver minst kunna:
+En liten version kan exempelvis:
 
 1. Skapa ett café
 2. Ge spelaren pengar
-3. Köpa ingredienser
+3. Köpa en ingrediens
 4. Tillverka en produkt
 5. Sälja produkten
-6. Få pengar från försäljningen
+6. Uppdatera pengarna
 
-### Fördjupning
+### Om du blir klar
+
+Du kan exempelvis lägga till:
 
 * Fler produkter
 * Recept
@@ -280,15 +258,6 @@ Spelet behöver minst kunna:
 * Lager
 * Olika priser
 * Uppgraderingar
-* Olika kundtyper
-
----
-
-# Bygg själv
-
-Här får du en tydlig spelidé och vissa krav.
-
-Du behöver själv bestämma exakt vilka klasser och metoder du behöver och hur OOP-koncepten ska användas.
 
 ---
 
@@ -296,9 +265,9 @@ Du behöver själv bestämma exakt vilka klasser och metoder du behöver och hur
 
 ## Spelet
 
-Du driver ett djurhem.
+Du driver ett litet djurhem.
 
-Djur kommer till djurhemmet och du behöver ta hand om dem tills de kan adopteras.
+Olika djur kommer till djurhemmet och behöver tas om hand innan de kan adopteras.
 
 Djur kan exempelvis behöva:
 
@@ -307,20 +276,9 @@ Djur kan exempelvis behöva:
 * Vila
 * Veterinärvård
 
-Olika djur kan ha olika behov.
+Olika djur kan ha olika behov och beteenden.
 
-## Krav
-
-Spelet ska innehålla:
-
-* Minst 3 klasser
-* Minst en superklass med subklasser
-* Polymorfism
-* Inkapsling
-* Relationer mellan objekt
-* Någon form av spel-loop
-
-### Exempel
+## Exempel
 
 Du skulle kunna ha:
 
@@ -331,7 +289,35 @@ Animal
 └── Rabbit
 ```
 
-Men exakt vilka klasser och beteenden du använder bestämmer du själv.
+Men du bestämmer själv vilka klasser och beteenden som behövs.
+
+## Lagom första version
+
+Du kan exempelvis göra ett system där spelaren:
+
+1. Ser vilka djur som finns
+2. Väljer ett djur
+3. Tar hand om djuret
+4. Förbättrar djurets behov
+5. Försöker få djuret redo för adoption
+
+### Om du blir klar
+
+Du kan exempelvis lägga till:
+
+* Fler djur
+* Adoptioner
+* Flera behov
+* Olika djurbeteenden
+* Djur som reagerar olika på aktiviteter
+
+---
+
+# Mer fria projekt
+
+Här får du en spelidé och några ramar, men du behöver själv bestämma hur programmet ska byggas.
+
+Tänk på att hålla projektet litet.
 
 ---
 
@@ -339,9 +325,9 @@ Men exakt vilka klasser och beteenden du använder bestämmer du själv.
 
 ## Spelet
 
-Spelaren utforskar en dungeon med olika rum.
+Spelaren utforskar en liten dungeon med olika rum.
 
-I rummen kan det finnas exempelvis:
+I rummen kan det exempelvis finnas:
 
 * Föremål
 * Dörrar
@@ -349,25 +335,13 @@ I rummen kan det finnas exempelvis:
 * Pussel
 * Fiender
 
-Målet är att hitta en skatt och ta sig ut ur dungeonen.
+Målet kan vara att hitta en skatt och ta sig ut.
 
-Battle är valfritt.
+Du behöver inte skapa en stor dungeon. Några få rum räcker.
 
-## Krav
+## Exempel
 
-Spelet ska innehålla:
-
-* Minst 4 klasser
-* Arv
-* Polymorfism
-* Inkapsling
-* Relationer mellan objekt
-* Ett tydligt mål
-* Någon form av spel-loop
-
-### Exempel
-
-Du skulle kunna ha:
+Du skulle exempelvis kunna ha:
 
 ```text
 Item
@@ -376,63 +350,188 @@ Item
 └── Treasure
 ```
 
-Men hur du bygger systemet är upp till dig.
+Men hur du bygger systemet bestämmer du själv.
+
+### Kom ihåg
+
+Försök hitta:
+
+* En arvshierarki
+* En relation mellan objekt
+* Ett ställe där polymorfism passar
+* Några privata attribut
 
 ---
 
-# Friare spelidéer
+# 5. Potion Shop
 
-Här får du bara en idé.
+Du driver en liten magisk butik där du tillverkar och säljer potions.
 
-Du ansvarar själv för att designa spelet och bestämma hur kraven på OOP ska uppfyllas.
+Du kan exempelvis:
+
+* Köpa ingredienser
+* Tillverka potions
+* Sälja potions
+* Hantera pengar
+
+Du behöver inte skapa ett stort ekonomisystem.
+
+### Exempel
+
+Du skulle kunna ha olika typer av potions:
+
+```text
+Potion
+├── HealthPotion
+├── SpeedPotion
+└── StrengthPotion
+```
+
+Men du bestämmer själv hur OOP ska användas.
 
 ---
 
-# 5. Supermarket Manager
+# 6. Supermarket Manager
 
 Du driver en liten butik.
 
-Köp in varor, sätt priser och sälj till kunder för att försöka tjäna pengar.
+Du kan exempelvis:
+
+* Köpa in varor
+* Ha ett lager
+* Sätta priser
+* Sälja varor
+* Hantera pengar
+
+Börja med några få varor och en enkel butik.
+
+Fundera på vilka saker som kan vara klasser och vilka objekt som behöver samarbeta.
 
 ---
 
-# 6. Racing Manager
+# 7. Racing Manager
 
-Du driver ett racingteam.
+Du driver ett litet racingteam.
 
-Köp fordon, anställ förare, uppgradera fordon och tävla i olika lopp.
+Du kan exempelvis hantera:
+
+* Förare
+* Fordon
+* Lopp
+* Uppgraderingar
+
+Du behöver inte skapa ett avancerat racingspel. Det kan räcka att simulera resultatet av ett lopp.
+
+Fundera på vilka saker som är olika typer av samma sak och var arv eller polymorfism kan passa.
 
 ---
 
-# 7. Hotel Manager
+# 8. Hotel Manager
 
-Du driver ett hotell.
+Du driver ett litet hotell.
 
-Hantera rum, gäster och bokningar och försök få hotellet att gå med vinst.
+Du kan exempelvis hantera:
 
----
+* Rum
+* Gäster
+* Bokningar
+* Betalningar
 
-# 8. Potion Shop
+Börja med några få rum och en enkel bokningsfunktion.
 
-Du driver en magisk butik där du tillverkar och säljer olika potions.
-
-Samla eller köp ingredienser och skapa egna recept.
+Fundera på vilka objekt som behöver känna till varandra och vilka egenskaper som bör vara privata.
 
 ---
 
 # 9. Pirate Trading
 
-Du har ett skepp och reser mellan olika öar.
+Du har ett skepp och reser mellan några olika öar.
 
-Köp varor billigt på en plats och försök sälja dem dyrare någon annanstans.
+På olika platser kan du köpa och sälja varor.
+
+Exempel:
+
+```text
+Ö → köp vara → res → sälj vara
+```
+
+Du kan exempelvis ha:
+
+* Skepp
+* Öar
+* Varor
+* Spelare
+
+Börja med två eller tre öar och några få varor.
 
 ---
 
 # 10. Sports Manager
 
-Du driver ett sportlag.
+Du driver ett litet sportlag.
 
-Hantera spelare, träning, matcher, ekonomi och lagets utveckling.
+Du kan exempelvis hantera:
+
+* Spelare
+* Tränare
+* Matcher
+* Träning
+
+Du behöver inte skapa en avancerad sportsimulator. En enkel simulering av matcher räcker.
+
+Fundera på vilka typer av personer eller spelare som kan ha gemensamma egenskaper och beteenden.
 
 ---
 
+# Egen idé
+
+Har du en egen spelidé går det också bra!
+
+Tänk bara på att **göra den mindre än du först tror**.
+
+Ett bra projekt kan exempelvis bestå av:
+
+```text
+3–4 klasser
+↓
+några objekt
+↓
+några metoder
+↓
+en enkel spel-loop
+↓
+ett tydligt mål
+```
+
+Du behöver inte skapa ett komplett spel.
+
+Om din idé börjar bli väldigt stor: **förenkla den.**
+
+Exempel:
+
+> "Jag vill göra ett Pokémon-spel."
+
+kan bli:
+
+> "Jag gör en liten strid mellan två monster."
+
+---
+
+# Kom ihåg
+
+Oavsett vilket projekt du väljer ska du försöka hitta naturliga användningsområden för:
+
+**Inkapsling**
+Vilken information ska klassen själv kontrollera?
+
+**Arv**
+Vilka klasser är olika typer av samma sak?
+
+**Relationer**
+Vilka objekt behöver ha eller använda andra objekt?
+
+**Polymorfism**
+Var kan olika objekt reagera olika på samma metodanrop?
+
+**Planering**
+Hur kan du dela upp arbetet i små steg?
